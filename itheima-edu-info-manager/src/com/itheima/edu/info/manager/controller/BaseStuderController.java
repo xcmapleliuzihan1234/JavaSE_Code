@@ -66,6 +66,7 @@ public abstract class BaseStuderController {
             }
         }
     }
+
     public final void setStudent() {
 
         String sid = inputStudentid("ÐÞ¸Ä");
