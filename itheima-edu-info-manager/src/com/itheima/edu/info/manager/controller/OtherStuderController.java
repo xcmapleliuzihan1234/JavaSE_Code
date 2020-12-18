@@ -6,7 +6,7 @@ import com.itheima.edu.info.manager.service.StudentService;
 import java.util.Scanner;
 
 //客服
-public class StuderController extends BaseStuderController{
+public class OtherStuderController extends BaseStuderController {
    private Scanner sc = new Scanner(System.in);
 
     public Student inputStudentinfo(String sid){
@@ -16,11 +16,7 @@ public class StuderController extends BaseStuderController{
         String age = sc.next();
         System.out.println("学生生日");
         String brithday = sc.next();
-        Student stu = new Student();
-        stu.setId(sid);
-        stu.setName(name);
-        stu.setAge(age);
-        stu.setBrithday(brithday);
+        Student stu = new Student(sid,name,age,brithday);
         return stu;
     }
 }

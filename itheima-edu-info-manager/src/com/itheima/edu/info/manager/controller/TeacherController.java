@@ -126,11 +126,8 @@ public class TeacherController {
         System.out.println("请输入生日：");
         String birthday = sc.next();
         //创建老师对象
-        Teacher tch = new Teacher();
-        tch.setId(id);
-        tch.setName(name);
-        tch.setAge(age);
-        tch.setBrithday(birthday);
+        Teacher tch = new Teacher(id,name,age,birthday);
+
         return tch;
     }
 }
