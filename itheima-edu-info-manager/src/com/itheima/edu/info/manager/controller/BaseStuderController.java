@@ -6,7 +6,7 @@ import com.itheima.edu.info.manager.service.StudentService;
 import java.util.Scanner;
 //开闭原则：不改变原代码
 //客服
-public class BaseStuderController {
+public abstract class BaseStuderController {
     private StudentService studentService = new StudentService();
    private Scanner sc = new Scanner(System.in);
 
@@ -51,7 +51,7 @@ public class BaseStuderController {
     Student[] stus = studentService.findStudent();
 
 //查看学生
-    public void findStudent() {
+    public final void findStudent() {
         Student[] stus = studentService.findStudent();
         //判断全空是为了表头好看，否则可以直接传入数组
         if(stus ==null){
@@ -66,7 +66,7 @@ public class BaseStuderController {
             }
         }
     }
-    public void setStudent() {
+    public final void setStudent() {
 
         String sid = inputStudentid("修改");
         //调用输入信息
@@ -77,7 +77,7 @@ public class BaseStuderController {
         }
     }
 
-    public void deleteStudent() {
+    public final void deleteStudent() {
         String id = inputStudentid("删除");
         if(studentService.isExisit(id)){
             studentService.deleteStudent(id);
@@ -85,7 +85,7 @@ public class BaseStuderController {
         }
     }
 
-    public void addStudent() {
+    public final void addStudent() {
         //1.添加学生
         String id;
         while(true){
@@ -109,7 +109,7 @@ public class BaseStuderController {
         }
     }
 
-    public String inputStudentid(String arr){
+    public final String inputStudentid(String arr){
         String sid;
         while (true){
 
@@ -127,8 +127,5 @@ public class BaseStuderController {
         } return sid;
     }
 
-    public Student inputStudentinfo(String sid){
-
-        return null;
-    }
+    public abstract Student inputStudentinfo(String sid);
 }
