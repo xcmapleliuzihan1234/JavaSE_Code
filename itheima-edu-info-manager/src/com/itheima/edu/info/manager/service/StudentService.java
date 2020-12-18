@@ -14,19 +14,24 @@ public class StudentService {
         return studentDao.addStudent(stu);
     }
 
-    public void deleteStudent() {
-
+    public void deleteStudent(String id) {
+       studentDao.deleteStudent(id);
     }
-
-    public void setStudent() {
-
-    }
-
     //查看学生
     public Student[] findStudent() {
         Student[] stus = studentDao.findStudent();
+        boolean flag = false;
+        //先判断是否为全空
+        for (int i = 0; i < stus.length; i++) {
+            if(stus[i]!=null){
+                flag = true;
+            }
+        }if(flag == false){
+            return null;
+        }else {
+            return stus;
+        }
 
-        return stus;
     }
 
     public boolean isExisit(String id) {
@@ -39,5 +44,9 @@ public class StudentService {
             }
         }
         return flag;
+    }
+
+    public void setStudent(String sid,Student stu) {
+        studentDao.setStudent(sid,stu);
     }
 }

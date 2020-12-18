@@ -27,7 +27,25 @@ public class TeacherService {
     }
 
     public  Teacher[] findAllTeacher() {
-       return td.findAllTeacher();
+        Teacher[] tchs = td.findAllTeacher();
+        boolean flag = false;
+        //先判断是否为全空
+        for (int i = 0; i < tchs.length; i++) {
+            if(tchs[i]!=null){
+                flag = true;
+            }
+        }if(flag == false){
+            return null;
+        }else {
+            return tchs;
+        }
+    }
 
+    public void deleteStudent(String id) {
+        td.deleteTeacher(id);
+    }
+
+    public void setTeacher(String sid, Teacher tch) {
+        td.setTeacher(sid,tch);
     }
 }

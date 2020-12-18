@@ -48,28 +48,41 @@ public class StuderController {
         }
 
     }
-
+    Student[] stus = studentService.findStudent();
 
 //查看学生
     public void findStudent() {
         Student[] stus = studentService.findStudent();
-        boolean res = false;
-        for (int i = 0; i < stus.length; i++) {
-            Student stu = stus[i];
-            if (stu != null) {
-               res =true;
-                System.out.println(stu.getId() + " " + stu.getName() + " " + stu.getAge() + " " + stu.getBrithday());
-            }
-        }if(res ==false){
+        //判断全空是为了表头好看，否则可以直接传入数组
+        if(stus ==null){
             System.out.println("信息为空！");
+        }else {
+            System.out.println("学号\t\t姓名\t年龄\t生日");
+            for (int i = 0; i < stus.length; i++) {
+                Student stu = stus[i];
+                if (stu != null) {
+                    System.out.println(stu.getId() + "\t" + stu.getName() + "\t" + stu.getAge() + "\t\t" + stu.getBrithday());
+                }
+            }
         }
     }
     public void setStudent() {
 
+        String sid = inputStudentid("修改");
+        //调用输入信息
+        if(studentService.isExisit(sid)){
+            Student stu = inputStudentinfo(sid);
+           studentService.setStudent(sid,stu);
+                System.out.println("修改成功！");
+        }
     }
 
     public void deleteStudent() {
-
+        String id = inputStudentid("删除");
+        if(studentService.isExisit(id)){
+            studentService.deleteStudent(id);
+            System.out.println("删除成功！");
+        }
     }
 
     public void addStudent() {
@@ -86,19 +99,46 @@ public class StuderController {
         break;
     }
 }
-
-        System.out.println("学生姓名");
-        String name = sc.next();
-        System.out.println("学生年龄");
-        String age = sc.next();
-        System.out.println("学生生日");
-        String brithday = sc.next();
-        Student stu = new Student(id, name, age, brithday);
+        //调用输入
+        Student stu = inputStudentinfo(id);
         boolean result = studentService.addStudent(stu);
         if (result) {
             System.out.println("添加成功！");
         } else {
             System.out.println("添加失败！");
         }
+    }
+
+    public String inputStudentid(String arr){
+        String sid;
+        while (true){
+
+                System.out.println("请输入要" + arr + "的学生学号：");
+                sid = sc.next();
+
+                boolean exist = studentService.isExisit(sid);
+
+                if(!exist){
+                    System.out.println("学号不存在，检查后重试！");
+                   break;
+                }else {
+                    break;
+                }
+        } return sid;
+    }
+
+    public Student inputStudentinfo(String sid){
+        System.out.println("学生姓名");
+        String name = sc.next();
+        System.out.println("学生年龄");
+        String age = sc.next();
+        System.out.println("学生生日");
+        String brithday = sc.next();
+        Student stu = new Student();
+        stu.setId(sid);
+        stu.setName(name);
+        stu.setAge(age);
+        stu.setBrithday(brithday);
+        return stu;
     }
 }
