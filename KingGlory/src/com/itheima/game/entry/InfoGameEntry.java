@@ -1,6 +1,7 @@
 package com.itheima.game.entry;
 
 import com.itheima.game.Controller.HeroController;
+import com.itheima.game.Controller.PlayerController;
 
 import java.util.Scanner;
 
@@ -17,6 +18,8 @@ public class InfoGameEntry {
                     hc.start();
                     break;
                 case 2 :
+                    PlayerController pc = new PlayerController();
+                    pc.start();
                     break;
                 case 3 :
                     System.exit(0);

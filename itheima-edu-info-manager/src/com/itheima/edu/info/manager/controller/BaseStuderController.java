@@ -61,7 +61,7 @@ public abstract class BaseStuderController {
             for (int i = 0; i < stus.length; i++) {
                 Student stu = stus[i];
                 if (stu != null) {
-                    System.out.println(stu.getId() + "\t" + stu.getName() + "\t" + stu.getAge() + "\t\t" + stu.getBrithday());
+                    System.out.println(stu.getId() + "\t\t" + stu.getName() + "\t" + stu.getAge() + "\t\t" + stu.getBrithday());
                 }
             }
         }

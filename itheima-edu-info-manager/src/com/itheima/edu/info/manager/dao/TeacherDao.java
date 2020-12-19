@@ -5,6 +5,12 @@ import com.itheima.edu.info.manager.domain.Teacher;
 public class TeacherDao {
     private static Teacher[] tchs = new Teacher[5];
 
+    static {
+        Teacher tch1 = new Teacher("黑马001","张三","23","1999-11-11");
+        Teacher tch2 = new Teacher("黑马002","李四","24","1998-11-11");
+        tchs[0] = tch1;
+        tchs[1] = tch2;
+    }
     public boolean addTeacher(Teacher tch) {
         int index = -1;
         for (int i = 0; i < tchs.length; i++) {

@@ -72,7 +72,7 @@ public class TeacherController {
             for (int i = 0; i < tchs.length; i++) {
                 Teacher tch = tchs[i];
                 if (tch != null) {
-                    System.out.println(tch.getId() + "\t" + tch.getName() + "\t" + tch.getAge() + "\t\t" + tch.getBrithday());
+                    System.out.println(tch.getId() + "\t\t" + tch.getName() + "\t" + tch.getAge() + "\t\t" + tch.getBrithday());
                 }
             }
         }
