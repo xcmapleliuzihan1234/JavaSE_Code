@@ -22,6 +22,7 @@ public class InfoGameEntry {
                     pc.start();
                     break;
                 case 3 :
+                    System.out.println("感谢您的使用");
                     System.exit(0);
                     default:
                         System.out.println("您的输入有误！");

@@ -34,7 +34,7 @@ public class HeroController {
                     getHero();
                     break;
                 case "5":
-                    System.out.println("退出");
+                    System.out.println("您已退出英雄系统");
                     break lo;
                 default:
                     System.out.println("您的输入有误");

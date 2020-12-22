@@ -3,7 +3,7 @@ package com.itheima.edu.info.manager.dao;
 import com.itheima.edu.info.manager.domain.Student;
 
 //库管
-public class StudentDao {
+public class StudentDao implements BaseStudentDao {
     private static Student[] stus = new Student[5];
         static {
             Student stu1 = new Student("黑马001","张三","23","1999-11-11");
@@ -39,7 +39,7 @@ public class StudentDao {
             stus[index] = null;
     }
 
-    private int getIndex(String id) {
+    public int getIndex(String id) {
         int index = -1;
         for (int i = 0; i < stus.length; i++) {
             if (stus[i] != null && id != null && stus[i].getId().equals(id)) {
