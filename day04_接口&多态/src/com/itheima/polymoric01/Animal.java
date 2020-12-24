@@ -1,0 +1,7 @@
+package com.itheima.polymoric01;
+/*
+”ÎDemo≤Œøº
+ */
+public interface Animal {
+    void eat();
+}
