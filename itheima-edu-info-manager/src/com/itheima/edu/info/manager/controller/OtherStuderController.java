@@ -11,9 +11,9 @@ public class OtherStuderController extends BaseStuderController {
    private Scanner sc = new Scanner(System.in);
 
     public Student inputStudentinfo(String sid){
-        System.out.println("学生姓名");
+        System.out.println("学生姓名：");
         String name = sc.next();
-        System.out.println("学生生日");
+        System.out.println("学生生日（格式：2020-12-24）：");
         String brithday = sc.next();
         String age = DateUitl.getAge(brithday);
         Student stu = new Student(sid,name,age,brithday);

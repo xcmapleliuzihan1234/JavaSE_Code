@@ -3,6 +3,7 @@ package com.itheima.edu.info.manager.controller;
 import com.itheima.edu.info.manager.domain.Student;
 import com.itheima.edu.info.manager.domain.Teacher;
 import com.itheima.edu.info.manager.service.TeacherService;
+import com.itheima.edu.info.manager.uitl.DateUitl;
 
 import java.util.Scanner;
 
@@ -121,10 +122,10 @@ public class TeacherController {
     public Teacher inputTeacherinfo(String id){
         System.out.println("请输入姓名：");
         String name = sc.next();
-        System.out.println("请输入年龄：");
-        String age = sc.next();
-        System.out.println("请输入生日：");
+
+        System.out.println("请输入生日（格式：2020-12-24）：");
         String birthday = sc.next();
+        String age = DateUitl.getAge(birthday);
         //创建老师对象
         Teacher tch = new Teacher(id,name,age,birthday);
 

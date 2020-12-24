@@ -6,8 +6,8 @@ public class TeacherDao {
     private static Teacher[] tchs = new Teacher[5];
 
     static {
-        Teacher tch1 = new Teacher("黑马001","张三","23","1999-11-11");
-        Teacher tch2 = new Teacher("黑马002","李四","24","1998-11-11");
+        Teacher tch1 = new Teacher("安科001","王五","30","1990-11-11");
+        Teacher tch2 = new Teacher("安科002","赵六","29","1991-11-11");
         tchs[0] = tch1;
         tchs[1] = tch2;
     }
