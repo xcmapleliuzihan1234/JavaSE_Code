@@ -5,9 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUitl {
-    private DateUitl(){
+    private DateUitl() {
     }
-    public static String getAge(String date){
+
+    public static String getAge(String date) {
         Date date1 = new Date();
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
         long time = 0;
@@ -19,7 +20,7 @@ public class DateUitl {
 
         long time1 = date1.getTime();
 
-        int birth =(int)( (time1 - time)/(1000L*3600*24*365));
+        int birth = (int) ((time1 - time) / (1000L * 3600 * 24 * 365));
         return birth + "";
     }
 }
