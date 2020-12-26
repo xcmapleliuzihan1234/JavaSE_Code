@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class OtherStudentDao implements BaseStudentDao{
     private static ArrayList<Student> stus = new ArrayList<>();
         static {
-            Student stu1 = new Student("计科001","张三","22","1998-10-24");
-            Student stu2 = new Student("计科002","李四","22","1998-02-08");
+            Student stu1 = new Student("计科001","小韩","22","1998-10-24");
+            Student stu2 = new Student("计科002","小创","22","1998-02-08");
             stus.add(stu1);
             stus.add(stu2);
 

@@ -3,11 +3,18 @@ package com.itheima.edu.info.manager.controller;
 import com.itheima.edu.info.manager.domain.Student;
 import com.itheima.edu.info.manager.service.StudentService;
 
+import java.util.Comparator;
 import java.util.Scanner;
+import java.util.TreeSet;
+
 //开闭原则：不改变原代码
 //客服
 public abstract class BaseStuderController {
     private StudentService studentService = new StudentService();
+   private TreeSet<Student> set = new TreeSet<>(
+        (Student o1, Student o2)-> {
+            return o1.getId().compareTo(o2.getId());
+    });
    private Scanner sc = new Scanner(System.in);
 
     public void start() {
@@ -57,13 +64,21 @@ public abstract class BaseStuderController {
         if(stus ==null){
             System.out.println("信息为空！");
         }else {
-            System.out.println("学号\t\t姓名\t年龄\t生日");
+            //用TreeSet对数据以学号进行排序
             for (int i = 0; i < stus.length; i++) {
+                set.add(stus[i]);
+            }
+
+            System.out.println("学号\t\t姓名\t年龄\t生日");
+            for (Student sstu : set) {
+                System.out.println(sstu.getId() + "\t\t" + sstu.getName() + "\t" + sstu.getAge() + "\t\t" + sstu.getBrithday());
+            }
+          /*  for (int i = 0; i < stus.length; i++) {
                 Student stu = stus[i];
                 if (stu != null) {
                     System.out.println(stu.getId() + "\t\t" + stu.getName() + "\t" + stu.getAge() + "\t\t" + stu.getBrithday());
                 }
-            }
+            }*/
         }
     }
 
@@ -72,9 +87,13 @@ public abstract class BaseStuderController {
         String sid = inputStudentid("修改");
         //调用输入信息
         if(studentService.isExisit(sid)){
-            Student stu = inputStudentinfo(sid);
-           studentService.setStudent(sid,stu);
+            if(inputStudentinfo(sid) == null){
+                System.out.println("请输入正确的日期格式");
+            }else {
+                Student stu = inputStudentinfo(sid);
+                studentService.setStudent(sid,stu);
                 System.out.println("修改成功！");
+            }
         }
     }
 
@@ -89,27 +108,30 @@ public abstract class BaseStuderController {
     public final void addStudent() {
         //1.添加学生
         String id;
-        while(true){
-    System.out.println("学生学号");
-    id = sc.next();
-   // StudentService studentService1 = new StudentService();
-    boolean flag = studentService.isExisit(id);
-    if(flag){
-        System.out.println("当前学号已存在，请重新录入！");
-    }else {
-        break;
-    }
-}
+        while (true) {
+            System.out.println("学生学号");
+            id = sc.next();
+            // StudentService studentService1 = new StudentService();
+            boolean flag = studentService.isExisit(id);
+            if (flag) {
+                System.out.println("当前学号已存在，请重新录入！");
+            } else {
+                break;
+            }
+        }
         //调用输入
-        Student stu = inputStudentinfo(id);
-        boolean result = studentService.addStudent(stu);
-        if (result) {
-            System.out.println("添加成功！");
+        if (inputStudentinfo(id) == null) {
+            System.out.println("请输入正确的日期格式");
         } else {
-            System.out.println("添加失败！");
+            Student stu = inputStudentinfo(id);
+            boolean result = studentService.addStudent(stu);
+            if (result) {
+                System.out.println("添加成功！");
+            } else {
+                System.out.println("添加失败！");
+            }
         }
     }
-
     public final String inputStudentid(String arr){
         String sid;
         while (true){

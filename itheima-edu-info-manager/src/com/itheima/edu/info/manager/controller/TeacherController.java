@@ -11,30 +11,32 @@ public class TeacherController {
 
     Scanner sc = new Scanner(System.in);
     TeacherService ts = new TeacherService();
+
     public void start() {
         Scanner sc = new Scanner(System.in);
-        io: while (true){
+        io:
+        while (true) {
             System.out.println("--------欢迎来到 <老师> 管理系统--------");
             System.out.println("请输入您的选择: 1.添加老师  2.删除老师  3.修改老师  4.查看老师  5.退出");
             int choice = sc.nextInt();
-            switch (choice){
-                case 1 :
+            switch (choice) {
+                case 1:
                     // 添加
                     addTeacher();
                     break;
-                case 2 :
+                case 2:
                     //删除
                     deleteTeacher();
                     break;
-                case 3 :
+                case 3:
                     //修改
                     setTeater();
                     break;
-                case 4 :
-                   //查询
+                case 4:
+                    //查询
                     findAllTeacher();
                     break;
-                case 5 :
+                case 5:
                     System.out.println("感谢您的使用！");
                     break io;
                 default:
@@ -43,21 +45,26 @@ public class TeacherController {
             }
         }
     }
+
     Teacher[] stus = ts.findAllTeacher();
+
     public void setTeater() {
         //调用获取存在的id
-      String sid =  inputTeachrtid("修改");
-        if(ts.isExisit(sid)){
-            Teacher tch = inputTeacherinfo(sid);
-            ts.setTeacher(sid,tch);
-            System.out.println("修改成功！");
+        String sid = inputTeachrtid("修改");
+        if (ts.isExisit(sid)) {
+            if (inputTeacherinfo(sid) == null) {
+                System.out.println("请输入正确的日期格式");
+            } else {
+                Teacher tch = inputTeacherinfo(sid);
+                ts.setTeacher(sid, tch);
+                System.out.println("修改成功！");
+            }
         }
     }
-
     public void deleteTeacher() {
         Teacher[] stus = ts.findAllTeacher();
         String id = inputTeachrtid("删除");
-        if(ts.isExisit(id)){
+        if (ts.isExisit(id)) {
             ts.deleteStudent(id);
             System.out.println("删除成功！");
         }
@@ -66,9 +73,9 @@ public class TeacherController {
     public void findAllTeacher() {
 
         Teacher[] tchs = ts.findAllTeacher();
-        if(tchs ==null){
+        if (tchs == null) {
             System.out.println("信息为空！");
-        }else {
+        } else {
             System.out.println("工号\t\t姓名\t年龄\t生日");
             for (int i = 0; i < tchs.length; i++) {
                 Teacher tch = tchs[i];
@@ -82,53 +89,60 @@ public class TeacherController {
     public void addTeacher() {
         //检查工号是否已经存在
         String id;
-        while(true){
+        while (true) {
             System.out.println("请输入工号：");
             id = sc.next();
             boolean flag = ts.isExisit(id);
-            if(flag){
+            if (flag) {
                 System.out.println("当前工号已存在，请重新输入！");
-            }else {
+            } else {
                 break;
             }
         }
-        Teacher tch = inputTeacherinfo(id);
-        boolean res =  ts.addTeacher(tch);
-       if(res){
-           System.out.println("添加成功！");
-       }else {
-           System.out.println("添加失败！");
-       }
-    }
 
-    public String inputTeachrtid(String arr){
+        if (inputTeacherinfo(id) == null) {
+            System.out.println("请输入正确的日期格式");
+        } else {
+            Teacher tch = inputTeacherinfo(id);
+            boolean res = ts.addTeacher(tch);
+            if (res) {
+                System.out.println("添加成功！");
+            } else {
+                System.out.println("添加失败！");
+            }
+        }
+    }
+    public String inputTeachrtid(String arr) {
         String sid;
-        while (true){
+        while (true) {
 
-                System.out.println("请输入要" + arr + "的老师工号：");
-                sid = sc.next();
+            System.out.println("请输入要" + arr + "的老师工号：");
+            sid = sc.next();
 
-                boolean exist = ts.isExisit(sid);
+            boolean exist = ts.isExisit(sid);
 
-                if(!exist){
-                    System.out.println("工号不存在，检查后重试！");
-                  break;
-                }else {
-                    break;
-                }
-        }return sid;
+            if (!exist) {
+                System.out.println("工号不存在，检查后重试！");
+                break;
+            } else {
+                break;
+            }
+        }
+        return sid;
     }
 
-    public Teacher inputTeacherinfo(String id){
+    public Teacher inputTeacherinfo(String id) {
         System.out.println("请输入姓名：");
         String name = sc.next();
-
         System.out.println("请输入生日（格式：2020-12-24）：");
         String birthday = sc.next();
         String age = DateUitl.getAge(birthday);
         //创建老师对象
-        Teacher tch = new Teacher(id,name,age,birthday);
-
-        return tch;
+        if (age.equals("-1")) {
+            return null;
+        } else {
+            Teacher tch = new Teacher(id, name, age, birthday);
+            return tch;
+        }
     }
 }
